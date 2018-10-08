@@ -41,18 +41,20 @@ defmodule GuardsTest do
 
   test "search" do
     board = Map.new(
-      [{0, Map.new([{0, :empty},  {1, :empty},  {2, :empty}])},
-       {1, Map.new([{0, :guard},  {1, :locked}, {2, :empty}])},
-       {2, Map.new([{0, :empty},  {1, :empty},  {2, :guard}])},
+      [{0, Map.new([{0, :empty},  {1, :empty},  {2, :empty},  {3, :empty}])},
+       {1, Map.new([{0, :guard},  {1, :locked}, {2, :empty},  {3, :empty}])},
+       {2, Map.new([{0, :empty},  {1, :empty},  {2, :guard},  {3, :empty}])},
+       {3, Map.new([{0, :empty},  {1, :empty},  {2, :locked}, {3, :empty}])},
       ]
     )
     solution = Map.new(
-      [{0, Map.new([{0, 1},      {1, 2},       {2, 2}])},
-       {1, Map.new([{0, :guard}, {1, :locked}, {2, 1}])},
-       {2, Map.new([{0, 1},      {1, 1},       {2, :guard}])},
+      [{0, Map.new([{0, 1},      {1, 2},       {2, 2},       {3, 3}])},
+       {1, Map.new([{0, :guard}, {1, :locked}, {2, 1},       {3, 2}])},
+       {2, Map.new([{0, 1},      {1, 1},       {2, :guard},  {3, 1}])},
+       {3, Map.new([{0, 2},      {1, 2},       {2, :locked}, {3, 2}])},
       ]
     )
-    answer = Guards.search({board, 3, 3})
+    answer = Guards.search({board, 4, 4})
     assert answer == solution
   end
 end
